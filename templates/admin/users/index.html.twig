@@ -1,0 +1,36 @@
+{% extends 'admin/admin_layout.html.twig' %}
+
+{% block body %}
+    {% include 'includes/messages.html.twig' %}
+    <h1>Usuários</h1>
+    <a href="{{path('admin_user_new')}}">Criar Usuário</a>
+    <hr>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Criado em</th>
+                <th>Ações</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td><a href="{{ path('admin_user_update', {'id': user.id}) }}">{{ user.firstName }}</a></td>
+                    <td>{{ user.email}}</td>
+                    <td>{{ user.CreatedAt|date('d/M/Y H:i:s') }}</td>
+                    <td>
+                        <a href="{{ path('admin_user_update', {'id': user.id}) }}">editar</a>
+                        <a href="{{ path('admin_user_delete', {'id': user.id}) }}">deletar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
